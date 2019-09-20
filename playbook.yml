@@ -1,14 +1,13 @@
 ---
-- hosts: all
+- hosts: localhost
   become: yes
   tasks:
     - name: Install Java
       apt:
-        name: penjdk-8-jre-headless
+        name: openjdk-8-jre-headless
 
     - name: Update repo and get Jenkins repository key
-      script: yum update ; wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo ; rpm --import http://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
-
+      shell: "apt update ; wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add - ; sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'"
     - name: Install Jenkins
       apt:
         name: jenkins
