@@ -18,4 +18,6 @@
         state: started
 
     - name: Enable Jenkins
-      script: chkconfig jenkins on
+      systemd:
+        name: jenkins
+        enabled: yes
