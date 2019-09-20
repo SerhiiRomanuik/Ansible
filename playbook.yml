@@ -1,12 +1,12 @@
 - name: Install Java
-  yum:
+  apt:
     name: java-1.8.0-openjdk
 
 - name: Update repo and get Jenkins repository key
   script: yum update ; wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo ; rpm --import http://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
 
 - name: Install Jenkins
-  yum:
+  apt:
     name: jenkins
 
 - name: Run a script only if file.txt exists on the remote node
