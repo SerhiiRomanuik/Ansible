@@ -2,17 +2,22 @@
 - hosts: localhost
   become: yes
   tasks:
-    - name: Install Java
-      apt:
-        name: openjdk-8-jre-headless
+    # - name: Update all packages to the latest version
+    #   apt:
+    #     upgrade: dist
+
+    # - name: Install Java
+    #   apt:
+    #     name: openjdk-8-jre-headless
 
     - name: Update repo and get Jenkins repository key
-      shell: "apt update ; wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add - ; sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'"
+      shell: "wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add - ; sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'"
+
     - name: Install Jenkins
       apt:
         name: jenkins
 
-    - name: Run a script only if file.txt exists on the remote node
+    - name: Serice start
       service:
         name: jenkins
         state: started
@@ -20,4 +25,3 @@
     - name: Enable Jenkins
       systemd:
         name: jenkins
-        enabled: yes
