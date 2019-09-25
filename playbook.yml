@@ -7,7 +7,7 @@
 #        upgrade: dist
 
     - name: Install Java
-      shell: "sudo apt install openjdk-8-jre-headless"
+      shell: "apt-get -y install openjdk-8-jre-headless"
 
     - name: Update repo and get Jenkins repository key
       shell: "wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add - ; sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/s$
